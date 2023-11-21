@@ -1,0 +1,36 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Orderdate</th>
+                <th>Time</th>
+                <th>Customername</th>
+                <th>Total</th>
+                <th>Quantity</th>
+                <th>Stock</th>
+            </tr>
+            {% for v in de %}
+            <tr>
+                <td>{{v.Orderdate}}</td>
+                <td>{{v.Time}}</td>
+                <td>{{v.Customername}}</td>   
+            {% for i in od %}
+                <td>{{i.Total}}</td>
+                <td>{{i.Quantity}}</td>
+                <td>{{i.Productid.Stock}}</td>
+            {% if v.Status == 'pending' %}
+                <td><a href="{% url 'cancel' v.id %}">cancel</a></td>
+            {% endif %}
+            {% if v.Status == 'approved' %}
+                <td><a href="{% url 'Trackview' v.id %}">trackview</a></td>  
+                
+            {% endif %}     
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+Welcome Seller
+<li><a href="{% url 'editprofile' %}">editprofile</a></li>
+<li><a href="{% url 'productdetails'%}">productdetails</a></li>
+<li><a href="{% url 'productview' %}">productview</a></li>
+<li><a href="{% url 'vieworder' %}">vieworder</a></li>
+<li><a href="{% url 'Changepassword' %}">Changepassword</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+
+
+{% endblock %}
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}
+

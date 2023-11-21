@@ -1,0 +1,22 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Customername</th>
+                <th>Address</th>
+                <th>Phonenumber</th>
+            </tr>
+            {% for v in od %}
+            <tr>
+                <td>{{v.Customername}}</td>
+                <td>{{v.Address}}</td>
+                <td>{{v.Phonenumber}}</td>
+                <td><a href="{% url 'Details' v.id %}">Details</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

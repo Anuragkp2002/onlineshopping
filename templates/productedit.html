@@ -1,0 +1,50 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <table>
+         <form method="post" action="{% url 'producteditAction' %}" enctype="multipart/form-data">
+            {% csrf_token %}   
+        {% for v in pr %} 
+        <input type="hidden" name="id" value="{{v.id}}">
+        <tr>
+            <th>Name</th>
+            <td><input type="text" name="name" value="{{v.Name}}"></td>
+        </tr>
+        <tr>
+            <th>File</th>
+            <td><input type="file" name="file">
+                <img src="{{v.File.url}}" height="100px" width="100px" alt="nopic"></td>
+        </tr>    
+        <tr>
+            <th>Price</th>
+            <td><input type="text" name="price" value="{{v.Price}}"></td>
+        </tr>
+        <tr>
+            <th>Stock</th>
+            <td><input type="text" name="stock" value="{{v.Stock}}"></td>
+        </tr>
+        <tr>
+            <th>Details</th>
+            <td><input type="text" name="details" value="{{v.Details}}"></td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>
+            <select name="category">
+                <option value="">{{v.Categoryid.categoryname}}</option>
+                {% for v in ca %}
+                <option value="{{v.id}}">{{v.categoryname}}</option>
+                {% endfor %} 
+            </select>
+            </td>    
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="edit"></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

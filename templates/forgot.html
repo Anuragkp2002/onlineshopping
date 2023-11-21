@@ -1,0 +1,39 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'forgotAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td><input type="text" name="phonenumber"></td>
+                <td><input type="hidden" name="username" value="{{ad}}"></td>
+
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>
+                    <select name="country">
+                        <option value="">---select---</option>
+                        <option value="India">India</option>
+                        <option value="Srilanka">Srilanka</option>
+                        <option value="Austalia">Austalia</option>
+                        <option value="England">England</option>
+
+                </td>
+
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Continue"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".checkproduct").change(function(){
+                    var t=$("#grandtotal").val();
+                    var p=$("#"+$(this).val()).val();
+                    $("#grandtotal").val(parseInt(t)+parseInt(p));
+                })
+            })
+        </script>
+        <form method="post" action="{% url 'cartviewAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Productname</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% for v in ct %}
+            <tr>
+                <td>{{v.Productid.Name}}</td>
+                <td><img src="{{v.Productid.File.url}}" height="70px" width="70px" alt="nopic"></td>
+                <td>{{v.Quantity}}</td>
+                <td>{{v.Total}}</td>
+                <td><input type="checkbox" value="{{v.id}}" class="checkproduct" name="checkbox"></td>
+                <input type="hidden" value="{{v.Total}}" id="{{v.id}}">
+            </tr>
+            {% endfor %}    
+            <tr>
+                <th>Grandtotal</th>
+                <td><input type="text" name="grandtotal" readonly="true" value="0" id="grandtotal"></td>
+            </tr>
+
+            <tr>
+                <th>CustomerName</th>
+                <td><input type="text" name="customername"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" id="" cols="21" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td><input type="text" name="phonenumber"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="submit"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+{% endblock %}
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+    {% endif %}

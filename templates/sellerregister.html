@@ -1,0 +1,160 @@
+{% extends 'Newbase.html' %}
+{% block content %}
+<html>
+    <body>
+        <script src="/static/jquery-1.8.3.min.js"> </script>
+        <script>
+            $(document).ready(function(){
+                $("#username").change(function(){
+                    var username=$("#username").val();
+                    $.ajax({
+                        url:"{% url 'sellerexist' %}",
+                        data:{'user':username},
+                        success:(function(data){
+                            if(data.valid=="exist")
+                                {
+                                 alert("Username already exist")
+                                }
+                        })
+                    })
+
+                })
+            })
+        </script>
+        <script type="text/javascipt"></script>
+        <script>
+            function validation(){
+                var alpha=/^[a-zA-z]+$/;
+                var num=/^[0-9]{10}$/;
+
+
+                var name=document.getElementById('name');
+                var gender=document.myform.gender ;
+                var dob=document.getElementById('dob');  
+                var phonenumber=document.getElementById('phonenumber'); 
+                var country=document.getElementById('country');
+                var file=document.getElementById('file');
+                var username=document.getElementById('username');
+                var password=document.getElementById('password');   
+                
+                if(name.value.length == 0)
+                {
+                    alert("enter name");
+                    return false;
+                }
+                else if(!name.value.match(alpha))
+                {
+                    alert("invalid name");
+                    name.focus();
+                    return false;
+                }
+                else if(gender[0].checked ==false && gender[1].checked ==false)
+                {
+                    alert("select gender");
+                    return false;
+                }
+                else if(dob.value.length == 0)
+                {
+                    alert("enter date of birth");
+                    return false;
+                }
+                else if(phonenumber.value.length == 0)
+                {
+                    alert("enter phonenumber");
+                    return false;
+                }
+                else if(!phonenumber.value.match(num))
+                {
+                    alert("invalid phonenumber");
+                    phonenumber.focus();
+                    return false;
+                }
+                else if(country.value.length == 0)
+                {
+                    alert("select country");
+                    return false;
+                }
+                else if(file.value.length == 0)
+                {
+                    alert("upload file");
+                    return false;
+                }
+                else if(username.value.length == 0)
+                {
+                    alert("enter username");
+                    return false;
+                }
+                else if(password.value.length == 0)
+                {
+                    alert("enter password");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }  
+        </script>      
+        <table>
+            <form method="POST" action="{% url 'sellerregisterAction' %}" enctype="multipart/form-data" name="myform">
+                {% csrf_token %}
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>    
+            <tr>
+                <th>Gender</th>
+                <td><input type="radio" name="gender" value="Male" id="gender">Male
+                    <input type="radio" name="gender" value="Female">Female</td>
+            </tr>
+            <tr>
+                <th>DOB</th>
+                <td><input type="date" name="dob" id="dob"></td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td><input type="text" name="Phonenumber" id="phonenumber"></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>
+                <select name="country" id="country">
+                    <option value="">---select---</option>
+                    <option value="India">India</option>
+                    <option value="Srilanka">Srilanka</option>
+                    <option value="Austalia">Austalia</option>
+                    <option value="England">England</option>    
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td><input type="file" name="file" id="file"></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="username" id="username"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="register" onclick="return validation()"></td>
+            </tr>
+            </form>
+        </table>
+    </body>    
+</html>  
+{% endblock %}
+  
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

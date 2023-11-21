@@ -1,0 +1,58 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'productdetailsAction' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td><input type="file" name="file"></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td><input type="text" name="price"></td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td><input type="text" name="stock"></td>
+            </tr>
+            <tr>
+                <th>Details</th>
+                <td><input type="text" name="details"></td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>
+                    <select name="category" id="category">
+                        <option value="">---select---</option>
+                        {% for v in ca %}
+                        <option value="{{v.id}}">{{v.categoryname}}</option>
+
+                        {% endfor %}
+
+                    </select>
+                </td>    
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="submit"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+    {% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+    {% endif %}
+</html>
+{% endblock %}
+

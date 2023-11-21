@@ -1,0 +1,26 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'TrackdetailsAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Details</th>
+                <td><textarea name="details" id="" cols="28" rows="8"></textarea>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="submit"></td>
+                <td></td>
+            </tr>
+            {% for v in tr %}
+            <tr>
+                <td><input type="hidden" name="orderid" value="{{v.id}}"></td>
+            </tr>
+            {% endfor %}
+        </table>
+        </form>
+    </body>
+</html>
+{% endblock %}

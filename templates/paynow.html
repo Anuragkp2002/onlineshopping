@@ -1,0 +1,45 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <form method="post" action="{% url 'paynowAction' %}">
+            {% csrf_token %}
+        <table>
+            {%  for v in pd %}
+            <tr>
+                <input type="hidden" name="orderid" value="{{v.id}}">
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>Cardnumber</th>
+                <td><input type="text" name="Cardnumber" ></td>
+            </tr>
+            <tr>
+                <th>CardholderName</th>
+                <td><input type="text" name="cardholdername" placeholder="Firstname"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="text" name="" placeholder="Lastname"></td>
+                
+            </tr>
+            <tr>
+                <th>Expirydate</th>
+                <td><input type="date" name="expirydate" placeholder="dd/mm/yyyy"></td>
+            </tr>
+            <tr>
+                <th>CVV</th>
+                <td><input type="text" name="cvv"></td>
+            </tr>
+            {% for v in pd %}
+            <tr>
+                    <th></th>
+                    <td><input type="submit" value="Paynow {{v.Grandtotal}}"></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        </form>
+    </body>
+</html>
+{% endblock %}

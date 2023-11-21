@@ -1,0 +1,21 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <form method="POST" action="{% url 'categoryAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <th>Catogeryname</th>
+                <td><input type="text" name="Name"></td>
+                
+           </tr>
+           <tr>
+            <th></th>
+            <td><input type="submit" value="submit"></td>
+           </tr>
+        </form>
+        </table>
+    </body>
+</html>
+{% endblock %}

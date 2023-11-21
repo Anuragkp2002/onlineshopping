@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<li><a href="{% url 'login' %}">login</a></li>
+<li><a href="{% url 'buyerregister' %}">buyerregister</a></li>
+<li><a href="{% url 'sellerregister' %}">sellerregister</a></li>
+
+
+
+
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+    {% endif %}
+

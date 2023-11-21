@@ -1,0 +1,22 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+Welcome Buyer
+<li><a href="{% url 'buyeredit' %}">buyeredit</a></li>
+<li><a href="{% url 'viewproduct' %}">viewproduct</a></li>
+<li><a href="{% url 'cartview' %}">cartview</a></li>
+<li><a href="{% url 'orderdetails' %}">Orderdetails</a></li>
+<li><a href="{% url 'changepassword' %}">Changepassword</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+
+
+{% endblock %}
+
+
+{% if messages %}
+    {% for msg in messages %}
+    <script>
+        alert('{{msg}}')
+        </script>
+    {% endfor %}
+
+{% endif %}

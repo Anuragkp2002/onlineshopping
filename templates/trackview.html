@@ -1,0 +1,21 @@
+{% extends 'Newbase.html' %}
+{% block content%}}
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Details</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+            {% for v in tk %}
+            <tr>
+                <td>{{v.Details}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Time}}</td>
+            </tr>      
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}

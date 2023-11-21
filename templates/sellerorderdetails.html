@@ -1,0 +1,42 @@
+{% extends 'Newbase.html' %}
+{% block content%}
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Orderdate</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% for v in odd %}
+            <tr>
+                <td>{{v.Orderdate}}</td>
+                <td>{{v.Time}}</td>
+
+            {% for i in dr %}    
+                <td>{{i.Productid.Name}}</td>
+                <td>{{v.Status}}</td>
+                <td>{{i.Quantity}}</td>
+                <td>{{i.Total}}</td>
+                
+            </tr>
+            {% if v.Status == 'pending' %}   
+                <td><a href="{% url 'Approve' v.id %}">approve</a></td>
+                <td><a href="{% url 'Reject' v.id %}">reject</a></td> 
+            {% endif %}    
+            {% if v.Status == 'rejected' %}
+                <td><a href="{% url 'Confirmcancel' v.id %}">Confirmcancel</a></td>
+            {% endif %}  
+            {% if v.Status == 'approved' %} 
+                <td><a href="{% url 'Trackdetails' v.id %}">Trackdetails</a></td>
+            {% endif %}
+            {% endfor %}
+
+            {% endfor %}
+        </table>
+    </body>
+</html>
+{% endblock %}
